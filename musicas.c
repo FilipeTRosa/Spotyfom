@@ -13,13 +13,13 @@ desc_Playlist * criaLista (void){
     return lista;
 }
 
-musica * criaMusica (){
+musica * criaMusica (char * fartista, int fcodigo, char * ftitulo, char * fletra){
     
     //defincao de variaveis.
-        char titulo [256], artista [256], letra[256];
-        codigoMusica++;
+        //char titulo [256], artista [256], letra[256];
+        //codigoMusica++;
     //preenchimento de variaveis.
-        printf("\nDigite o titulo da musica\n");
+        /*printf("\nDigite o titulo da musica\n");
             limpar_buffer();
             fgets(titulo, 256, stdin);
             printf("Digite o artista\n");
@@ -27,14 +27,14 @@ musica * criaMusica (){
             fgets(artista, 256, stdin);
             printf("Digite a letra da musica\n");
             void limpar_buffer();
-            fgets(letra, 256, stdin);
+            fgets(letra, 256, stdin);*/
     //alocação de memoria
     musica * novaMusica = (musica *) malloc (sizeof(musica));
         //preenchimento struct musica
-        strcpy(novaMusica->titulo, titulo);
-        strcpy(novaMusica->artista, artista);
-        strcpy(novaMusica->letra, letra);
-        novaMusica->codigo = codigoMusica;
+        strcpy(novaMusica->titulo, ftitulo);
+        strcpy(novaMusica->artista, fartista);
+        strcpy(novaMusica->letra, fletra);
+        novaMusica->codigo = fcodigo;
         novaMusica->execucoes = 0;
     
     printf("Musica criada com sucesso\n");
@@ -202,7 +202,7 @@ nodo * buscaNodo(desc_Playlist * lista, int posicao){
 }
 
 void setMusica (desc_Playlist * lista){
-    musica * fmusica = criaMusica();
+    /*musica * fmusica = criaMusica();
     int posicao;
     printf("Digite a posicao da lista que deseja alterar. \n");
     scanf("%d", &posicao);
@@ -214,7 +214,7 @@ void setMusica (desc_Playlist * lista){
         return;
     }else{
         aux->info = fmusica;
-    }
+    }*/
 }
 
 void setNodo (desc_Playlist * lista,nodo * novoNodo, int posicao){

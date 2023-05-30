@@ -37,7 +37,7 @@ typedef struct desc_Playlist{
 – Imprime */
 
 desc_Playlist * criaLista (void); //ok
-musica * criaMusica (void); //ok
+musica * criaMusica (char * fartista, int fcodigo, char * ftitulo, char * fletra); //ok
 nodo * criaNodo(void); //ok
 void insereLDE (desc_Playlist* lista,musica * fmusica, int posicao);
 nodo * removeLDE (desc_Playlist* lista, int posicao);
