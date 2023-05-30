@@ -40,6 +40,7 @@ int main(){
 			frase[n]='\0';
 		}
 	}
+		imprimeLista(acervo);
 	
 	return 0;
 }
@@ -51,16 +52,17 @@ void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica)
 	//nodo * novoNodo = NULL;
 
 	printf("\n\n===================================\n");
-	printf("artista é: %s \n",strtok(frase,";"));
+	//printf("artista é: %s \n",strtok(frase,";"));
 	strcpy(artista,strtok(frase,";"));
-	printf("codigo é: %s \n",strtok(NULL,";"));
+	//printf("codigo é: %s \n",strtok(NULL,";"));
 	int codigo = atoi(strtok(NULL,";"));
-	printf("titulo é: %s \n",strtok(NULL,";"));
+	//printf("titulo é: %s \n",strtok(NULL,";"));
 	strcpy(titulo,strtok(NULL,";"));
-	printf("letra é: %s \n",strtok(NULL,";")); 
+	//printf("letra é: %s \n",strtok(NULL,";")); 
 	strcpy(letra,strtok(NULL,";"));
-	printf("===================================\n");
 	novaMusica = criaMusica(artista,codigo,titulo,letra);
+	printf("===================================\n");
+	
 	//novoNodo = criaNodo();
 	//novoNodo->info = novaMusica;
 	insereLDE(acervo, novaMusica, 0);

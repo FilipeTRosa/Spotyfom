@@ -15,19 +15,6 @@ desc_Playlist * criaLista (void){
 
 musica * criaMusica (char * fartista, int fcodigo, char * ftitulo, char * fletra){
     
-    //defincao de variaveis.
-        //char titulo [256], artista [256], letra[256];
-        //codigoMusica++;
-    //preenchimento de variaveis.
-        /*printf("\nDigite o titulo da musica\n");
-            limpar_buffer();
-            fgets(titulo, 256, stdin);
-            printf("Digite o artista\n");
-            void limpar_buffer();
-            fgets(artista, 256, stdin);
-            printf("Digite a letra da musica\n");
-            void limpar_buffer();
-            fgets(letra, 256, stdin);*/
     //alocação de memoria
     musica * novaMusica = (musica *) malloc (sizeof(musica));
         //preenchimento struct musica
@@ -37,8 +24,8 @@ musica * criaMusica (char * fartista, int fcodigo, char * ftitulo, char * fletra
         novaMusica->codigo = fcodigo;
         novaMusica->execucoes = 0;
     
-    printf("Musica criada com sucesso\n");
-    printf("\n Musica criada\n\n[Titulo] = %s[Artista] = %s[Letra] = %s\n\n", novaMusica->titulo, novaMusica->artista, novaMusica->letra);
+    //printf("Musica criada com sucesso\n");
+    //printf("\n Musica criada\n\n[Titulo]: %s [Artista]: %s [Letra]: %s [COD]: %d\n\n", novaMusica->titulo, novaMusica->artista, novaMusica->letra, novaMusica->codigo);
     
     return novaMusica;
 }
