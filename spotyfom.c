@@ -22,9 +22,11 @@ int main(){
 	char caractere;
 	char frase[256];
 	int  n=0;
-	//prepara a lista para o acervo
+	//preparando variaveis para o sistema
 	desc_Playlist * acervo = criaLista();
 	musica * novaMusica = NULL;
+	nodo * nodo = NULL;
+	desc_queue * queue = createQueue();
 	//vai percorrer o arquivo e alocar cada musica no acervo
 	while((caractere = fgetc(arquivoEntrada))!= EOF){
 		if(caractere != '\n'){ //caractere diferente de \n guarda em frase
@@ -40,7 +42,87 @@ int main(){
 			frase[n]='\0';
 		}
 	}
-		imprimeLista(acervo);
+		//imprimeLista(acervo);
+	
+	//Menu principal e variaveis dos menus filhos
+	int menuPrincipal=0,menuPlaylist=0;
+	int quantMusicas = 0, contadorItensFila = 0;
+	do
+	{
+		printf("\nMenu Principal:\n");
+		printf("[1] - Execucao.\n");
+		printf("[2] - Playlist.\n");
+		printf("[3] - Busca.\n");
+		printf("[4] - Impressão.\n");
+		printf("[5] - Relatorios,\n");
+		printf("[6] - Sair.\n");
+		setbuf(stdin,NULL);
+		scanf("%d", &menuPrincipal);
+
+		switch (menuPrincipal)
+		{
+		case 1:
+			/* Execução */
+			break;
+		case 2:
+			/* Playlist */
+			do
+			{
+				printf("\nEscolha o tipo de playlis para criar. \n");
+				printf("[1] - Aleatoria.\n");
+				printf("[2] - Selecionar as musicas.\n");
+				printf("[3] - Voltar ao menu principal.\n");
+				setbuf(stdin,NULL);
+				scanf("%d", &menuPlaylist);
+
+				switch (menuPlaylist)
+				{
+				case 1:
+					/* Aleatoria */
+					printf("Quantidade de musicas disponiveis %d:\n", tamanhoAcervo);
+					printf("\nDigite a quantidade de musicas para a sua Playlist.\n");
+					setbuf(stdin, NULL);
+					scanf("%d", &quantMusicas);
+					//fazer um if para testar se 
+					//valor informado é < que tamanhoAcervo
+						while (contadorItensFila <= quantMusicas)
+						{
+							/* buscar na LDE pela posição e
+							inserir na fila */
+							nodo = buscaNodo(acervo, (rand()%quantMusicas));
+							queue = enqueue(queue, nodo);
+							contadorItensFila++;
+						}
+						printf("\n\n\n\n FILAAAAAA \n\n\n\n");
+						showQueue(queue);
+
+					break;
+				case 2:
+					/* Escolher musicas*/
+					/* Montar menu com os tipos de escolhas*/
+					break;
+				default:
+					break;
+				}
+			} while (menuPlaylist != 3);
+			
+			break;
+		case 3:
+			/* Busca */
+
+			break;
+		case 4:
+			/* Impressão */
+			break;
+		case 5:
+			/* Relatórios */
+			break;
+			
+		default:
+			break;
+		}
+
+	} while (menuPrincipal != 6);// Fim menu Principal
 	
 	return 0;
 }
@@ -51,7 +133,7 @@ void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica)
 	
 	//nodo * novoNodo = NULL;
 
-	printf("\n\n===================================\n");
+	//printf("\n\n===================================\n");
 	//printf("artista é: %s \n",strtok(frase,";"));
 	strcpy(artista,strtok(frase,";"));
 	//printf("codigo é: %s \n",strtok(NULL,";"));
@@ -61,7 +143,7 @@ void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica)
 	//printf("letra é: %s \n",strtok(NULL,";")); 
 	strcpy(letra,strtok(NULL,";"));
 	novaMusica = criaMusica(artista,codigo,titulo,letra);
-	printf("===================================\n");
+	//printf("===================================\n");
 	
 	//novoNodo = criaNodo();
 	//novoNodo->info = novaMusica;
