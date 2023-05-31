@@ -89,7 +89,7 @@ int main(){
 						{
 							/* buscar na LDE pela posição e
 							inserir na fila */
-							nodo = buscaNodo(acervo, (rand()%quantMusicas));
+							nodo = buscaNodo(acervo, 20);
 							queue = enqueue(queue, nodo);
 							contadorItensFila++;
 						}
