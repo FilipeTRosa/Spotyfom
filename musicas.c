@@ -236,5 +236,11 @@ void liberaPlaylist(desc_Playlist * lista){
     }
 }
 
+nodo * copiaNodo(nodo * nodoOriginal){
+    
+    nodo * novoNodo = criaNodo();
+    novoNodo->info = nodoOriginal->info;
 
+    return novoNodo;
+}
 

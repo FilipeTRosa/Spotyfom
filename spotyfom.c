@@ -25,7 +25,8 @@ int main(){
 	//preparando variaveis para o sistema
 	desc_Playlist * acervo = criaLista();
 	musica * novaMusica = NULL;
-	nodo * nodo = NULL;
+	nodo * nodoOriginal = criaNodo();
+	nodo * nodoPlaylistAleatoria = NULL;
 	desc_queue * queue = createQueue();
 	//vai percorrer o arquivo e alocar cada musica no acervo
 	while((caractere = fgetc(arquivoEntrada))!= EOF){
@@ -85,12 +86,13 @@ int main(){
 					scanf("%d", &quantMusicas);
 					//fazer um if para testar se 
 					//valor informado é < que tamanhoAcervo
-						while (contadorItensFila <= quantMusicas)
+						while (contadorItensFila < quantMusicas)
 						{
 							/* buscar na LDE pela posição e
 							inserir na fila */
-							nodo = buscaNodo(acervo, 20);
-							queue = enqueue(queue, nodo);
+							nodoOriginal = buscaNodo(acervo, rand()%tamanhoAcervo);
+							nodoPlaylistAleatoria = copiaNodo(nodoOriginal);
+							queue = enqueue(queue, nodoPlaylistAleatoria);
 							contadorItensFila++;
 						}
 						printf("\n\n\n\n FILAAAAAA \n\n\n\n");

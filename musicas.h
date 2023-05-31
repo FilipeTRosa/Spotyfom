@@ -47,3 +47,4 @@ void limpar_buffer();
 nodo * buscaNodo(desc_Playlist * lista, int posicao);
 void liberaPlaylist(desc_Playlist * lista);
 void setMusica(desc_Playlist * lista);
+nodo * copiaNodo(nodo * nodoOriginal);
