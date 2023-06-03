@@ -46,7 +46,7 @@ int main(){
 		//imprimeLista(acervo);
 	
 	//Menu principal e variaveis dos menus filhos
-	int menuPrincipal=0,menuPlaylist=0;
+	int menuPrincipal=0,menuPlaylist=0, menuExec = 0, menuPessoal = 0;
 	int quantMusicas = 0, contadorItensFila = 0;
 	do
 	{
@@ -63,7 +63,36 @@ int main(){
 		switch (menuPrincipal)
 		{
 		case 1:
-			/* Execução */
+			do
+			{
+				printf("Escolha qual playlist deseja executar.\n");
+				printf("[1] - Tocar todas as musicas.\n");
+				printf("[2] - Executar PLaylist Aleatoria.\n");
+				printf("[3] - Executar Playlist Pessoal.\n");
+				printf("[4] - Sair / VOltar ao menu principal.\n");
+				setbuf(stdin,NULL);
+				scanf("%d", &menuExec);
+
+
+				switch (menuExec)
+				{
+				case 1:
+					/* Executar acervo completo */
+
+					break;
+				case 2:
+					/*Executar playlist aleatoria*/
+
+					break;
+				case 3:
+					/*Executar playlist pessoal*/
+
+					break;
+				default:
+					break;
+				}
+			} while (menuExec != 4);
+			
 			break;
 		case 2:
 			/* Playlist */
@@ -86,6 +115,7 @@ int main(){
 					scanf("%d", &quantMusicas);
 					//fazer um if para testar se 
 					//valor informado é < que tamanhoAcervo
+					
 						while (contadorItensFila < quantMusicas)
 						{
 							/* buscar na LDE pela posição e
@@ -102,6 +132,12 @@ int main(){
 				case 2:
 					/* Escolher musicas*/
 					/* Montar menu com os tipos de escolhas*/
+					do
+					{
+						printf("Criar playlist escolhendo as musicas.\n");
+						
+					} while (menuPessoal != 8);
+					
 					break;
 				default:
 					break;
