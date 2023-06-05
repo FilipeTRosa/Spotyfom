@@ -48,3 +48,5 @@ nodo * buscaNodo(desc_Playlist * lista, int posicao);
 void liberaPlaylist(desc_Playlist * lista);
 void setMusica(desc_Playlist * lista);
 nodo * copiaNodo(nodo * nodoOriginal);
+void executarMusica(nodo * fnodo);
+void executarPlaylistLDE(desc_Playlist * flistaLDE, int tamanho);

@@ -125,5 +125,18 @@ void showQueue (desc_queue * fqueue){
 
 }
 
+void executarPlaylistQueue(desc_queue * fqueue, int tamanho){
+
+    nodo * fnodo = fqueue->head;
+    while (fnodo != NULL)
+        {
+            if (fnodo != NULL)
+            {
+                executarMusica(fnodo);
+            }
+            fnodo = fnodo->prox;
+        }				
+}
+
 
 

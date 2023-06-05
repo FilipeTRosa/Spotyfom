@@ -25,3 +25,4 @@ desc_queue * enqueue (desc_queue * fqueue, nodo * fnodo);
 nodo * dequeue (desc_queue * fqueue);
 int lenghtQueue (desc_queue * fqueue);
 void showQueue (desc_queue * fqueue);
+void executarPlaylistQueue(desc_queue * fqueue, int tamanho);

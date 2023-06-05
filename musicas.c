@@ -244,3 +244,23 @@ nodo * copiaNodo(nodo * nodoOriginal){
     return novoNodo;
 }
 
+void executarMusica(nodo * fnodo){
+
+    fnodo->info->execucoes++;
+    printf("Executando musica: %s\n", fnodo->info->titulo);
+}
+
+void executarPlaylistLDE(desc_Playlist * flistaLDE, int tamanho){
+
+    int cont = 0;
+    nodo * fnodo = NULL;
+    while (cont < tamanho)
+        {
+            fnodo = buscaNodo(flistaLDE, cont);
+            if (fnodo != NULL)
+            {
+                executarMusica(fnodo);
+            }
+            cont++;
+        }				
+}

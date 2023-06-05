@@ -27,6 +27,7 @@ int main(){
 	musica * novaMusica = NULL;
 	nodo * nodoOriginal = criaNodo();
 	nodo * nodoPlaylistAleatoria = NULL;
+	nodo * nodo = NULL;
 	desc_queue * queue = createQueue();
 	//vai percorrer o arquivo e alocar cada musica no acervo
 	while((caractere = fgetc(arquivoEntrada))!= EOF){
@@ -78,11 +79,11 @@ int main(){
 				{
 				case 1:
 					/* Executar acervo completo */
-
+					executarPlaylistLDE(acervo,tamanhoAcervo);
 					break;
 				case 2:
 					/*Executar playlist aleatoria*/
-
+					executarPlaylistQueue(queue, lenghtQueue(queue));
 					break;
 				case 3:
 					/*Executar playlist pessoal*/
