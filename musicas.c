@@ -98,8 +98,6 @@ void imprimeLista(desc_Playlist * lista){
 
     int i = 0;
     nodo * aux = lista->primeiramusica;
-
-
     while (i<lista->tamanho)
     {
         //printf("\n-*/-*/-*/-*/-*/\n");
@@ -160,22 +158,11 @@ nodo * removeLDE (desc_Playlist* lista, int posicao){
 
 
 nodo * buscaNodo(desc_Playlist * lista, int posicao){
-    //nodo * aux = lista->primeiramusica;
     int i = 0;
     if(posicao > lista->tamanho){
         printf("Posicao invalida! \n");
         return NULL;
     }else{
-        if(posicao > (lista->tamanho / 2)){
-            nodo * aux = lista->ultimamusica;
-            i = lista->tamanho - 1;
-            while (i<posicao)
-            {
-                aux = aux->ant;
-                i--;
-            }
-            return aux;
-        }else{
             nodo * aux = lista->primeiramusica;
             i = 0;
         while(i<posicao){
@@ -184,7 +171,6 @@ nodo * buscaNodo(desc_Playlist * lista, int posicao){
         }
         return aux;
         }
-    }
     return NULL;
 }
 

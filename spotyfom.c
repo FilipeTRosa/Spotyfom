@@ -47,8 +47,8 @@ int main(){
 		//imprimeLista(acervo);
 	
 	//Menu principal e variaveis dos menus filhos
-	int menuPrincipal=0,menuPlaylist=0, menuExec = 0, menuPessoal = 0;
-	int quantMusicas = 0, contadorItensFila = 0;
+	int menuPrincipal=0,menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
+	int quantMusicasAleatorias = 0, contadorItensFila = 0;
 	do
 	{
 		printf("\nMenu Principal:\n");
@@ -113,11 +113,11 @@ int main(){
 					printf("Quantidade de musicas disponiveis %d:\n", tamanhoAcervo);
 					printf("\nDigite a quantidade de musicas para a sua Playlist.\n");
 					setbuf(stdin, NULL);
-					scanf("%d", &quantMusicas);
+					scanf("%d", &quantMusicasAleatorias);
 					//fazer um if para testar se 
 					//valor informado é < que tamanhoAcervo
 					
-						while (contadorItensFila < quantMusicas)
+						while (contadorItensFila < quantMusicasAleatorias)
 						{
 							/* buscar na LDE pela posição e
 							inserir na fila */
@@ -136,6 +136,12 @@ int main(){
 					do
 					{
 						printf("Criar playlist escolhendo as musicas.\n");
+						printf("[1] - Escolher musicas por Posicao.\n");
+						printf("[2] - Escolher musicas por Nome.\n");
+						printf("[3] - Escolher musicas por Codigo.\n");
+						printf("[4] - Escolher musicas por Artista.\n");
+						setbuf(stdin, NULL);
+						scanf("%d", &menuPlaylistPessoal);
 						
 					} while (menuPessoal != 8);
 					
@@ -163,8 +169,18 @@ int main(){
 
 	} while (menuPrincipal != 6);// Fim menu Principal
 	
+	liberaPlaylist(acervo);
 	return 0;
+
 }
+
+
+
+
+
+
+
+
 
 void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica){
 	//com a frase em mãos é só dividir a frase e adicionar nas structs musica
