@@ -29,6 +29,7 @@ int main(){
 	nodo * nodoPlaylistAleatoria = NULL;
 	nodo * nodo = NULL;
 	desc_queue * queue = createQueue();
+	desc_Stack * stack = NULL;
 	//vai percorrer o arquivo e alocar cada musica no acervo
 	while((caractere = fgetc(arquivoEntrada))!= EOF){
 		if(caractere != '\n'){ //caractere diferente de \n guarda em frase
@@ -47,7 +48,7 @@ int main(){
 		//imprimeLista(acervo);
 	
 	//Menu principal e variaveis dos menus filhos
-	int menuPrincipal=0,menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
+	int menuPrincipal=0,menuImpressao = 0, menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
 	int quantMusicasAleatorias = 0, contadorItensFila = 0;
 	do
 	{
@@ -87,7 +88,7 @@ int main(){
 					break;
 				case 3:
 					/*Executar playlist pessoal*/
-
+					executarPlaylistStack(stack);
 					break;
 				default:
 					break;
@@ -140,27 +141,57 @@ int main(){
 						printf("[2] - Escolher musicas por Nome.\n");
 						printf("[3] - Escolher musicas por Codigo.\n");
 						printf("[4] - Escolher musicas por Artista.\n");
+						printf("[5] - Sair / Voltar ao menu anterior.\n");
 						setbuf(stdin, NULL);
 						scanf("%d", &menuPlaylistPessoal);
 						
-					} while (menuPessoal != 8);
-					
+						if (menuPlaylistPessoal < 5)
+						{	//chama funcao de criar playlist por escolha
+							//switch está dentro da funcao criarPlayListPessoal
+							stack = criarPlayListPessoal(acervo, menuPlaylistPessoal);
+						}
+					}while (menuPlaylistPessoal != 5);									
 					break;
 				default:
 					break;
 				}
 			} while (menuPlaylist != 3);
-			
+			/*fim do modulo de criar playlists*/
 			break;
 		case 3:
 			/* Busca */
 
+			/*Fim do modulo de Busca*/
 			break;
 		case 4:
 			/* Impressão */
+			printf("Qual playlist deseja imprimir?\n");
+			printf("[1] - Imprimir Acervo Completo.\n");
+			printf("[2] - Inprimir Playlist Aleatória.\n");
+			printf("[3] - Imprimir Playlist Pessoal.\n");
+			printf("[4] - Sair / Voltar ao menu anterior.\n");
+			setbuf(stdin, NULL);
+			scanf("%d", &menuImpressao);
+
+			switch (menuImpressao)
+			{
+			case 1:
+				imprimeLista(acervo);
+				break;
+			case 2:
+				showQueue(queue);
+				break;
+			case 3:
+				printStack(stack);
+				break;
+			default:
+				break;
+			}
+			/* Fim do modulo de Impressão*/
 			break;
 		case 5:
 			/* Relatórios */
+			/* Fim do modulo de Relatórios*/
 			break;
 			
 		default:

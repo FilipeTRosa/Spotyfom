@@ -50,3 +50,4 @@ void setMusica(desc_Playlist * lista);
 nodo * copiaNodo(nodo * nodoOriginal);
 void executarMusica(nodo * fnodo);
 void executarPlaylistLDE(desc_Playlist * flistaLDE, int tamanho);
+nodo * buscaNodoPorCodigo(desc_Playlist * lista, int codigo);

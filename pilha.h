@@ -28,3 +28,5 @@ int emptyStack (desc_Stack * fstack);
 void makenullStack (desc_Stack * fstack);
 int lengthStack (desc_Stack * fstack);
 void printStack (desc_Stack * fstack);
+desc_Stack * criarPlayListPessoal(desc_Playlist * facervo, int opcaoMenu);
+void executarPlaylistStack(desc_Stack * fstack);

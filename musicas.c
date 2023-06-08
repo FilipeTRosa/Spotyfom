@@ -104,6 +104,11 @@ void imprimeLista(desc_Playlist * lista){
         printf("\n[Elemento] = %d\n", i);
         imprimeNodo(aux);
         aux = aux->prox;
+        if (i%10 == 0)
+        {   
+            printf("\n\nMusicas impressas até o momento: [ %d ]\n Precione ENTER para continuar.", i);
+            getchar();
+        }
         i++;
     }
 }
@@ -173,6 +178,20 @@ nodo * buscaNodo(desc_Playlist * lista, int posicao){
         }
     return NULL;
 }
+
+nodo * buscaNodoPorCodigo(desc_Playlist * lista, int codigo){
+    nodo * fnodo = lista->primeiramusica;
+    while(fnodo != NULL){
+        if (fnodo->info->codigo == codigo)
+        {
+            return fnodo;
+        }else{
+            fnodo = fnodo->prox;
+        }
+    }
+    return NULL; 
+}
+
 
 void setMusica (desc_Playlist * lista){
     /*musica * fmusica = criaMusica();
