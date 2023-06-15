@@ -132,10 +132,16 @@ void executarPlaylistQueue(desc_queue * fqueue, int tamanho){
         {
             if (fnodo != NULL)
             {
-                executarMusica(fnodo);
+                executarMusica(fnodo); // funciona mas nao exclui da fila
             }
             fnodo = fnodo->prox;
         }				
+    // testar se funciona --- É o jeito que o trabalho pede
+    while (fqueue->tamanho != 0)
+    {
+        executarMusica(dequeue(fqueue)); // ainda tem que testar
+    }
+    
 }
 
 
