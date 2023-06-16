@@ -252,7 +252,7 @@ nodo * copiaNodo(nodo * nodoOriginal){
 void executarMusica(nodo * fnodo){
 
     fnodo->info->execucoes++;
-    printf("Executando musica: %s\n", fnodo->info->titulo);
+    printf("Executando musica: %s /-/ Codigo: [%d]\n", fnodo->info->titulo, fnodo->info->codigo);
 }
 
 void executarPlaylistLDE(desc_Playlist * flistaLDE, int tamanho){

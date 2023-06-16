@@ -58,6 +58,24 @@ desc_Stack * popStack (desc_Stack * fstack){
     }
     
 }
+
+nodo * popStackReturnNodo (desc_Stack * fstack){
+   
+    if (empty(fstack))
+    {
+        printf("Lista vazia");
+        return NULL;     
+    }else
+    {
+        nodo * aux = fstack->first_stack;
+        fstack->first_stack = aux->prox;
+        fstack->length--;
+        return aux;
+    }
+    
+}
+
+
 nodo * topStack (desc_Stack * fstack){
     return fstack->first_stack;    
 }
@@ -149,15 +167,15 @@ desc_Stack * criarPlayListPessoal(desc_Playlist * facervo, int opcaoMenu){
 
 void executarPlaylistStack(desc_Stack * fstack){
 
-    nodo * fnodo = fstack->first_stack;
-    while (fnodo!= NULL)
+    if (empty(fstack))
     {
-        if(fnodo != NULL)
-            executarMusica(fnodo);
-    
-        fnodo = fnodo ->prox;
+        printf("\n\nPlaylist Vazia!!\n\n");
+    }else{
+        while (!empty(fstack))
+        {
+            executarMusica(popStackReturnNodo(fstack));
+        }
     }
-    
 
 }
 
