@@ -24,6 +24,8 @@ int main(){
 	int  n=0;
 	//preparando variaveis para o sistema
 	desc_Playlist * acervo = criaLista();
+	desc_Playlist * ListaBuscaPorTitulo = NULL; // quando buscar por titulo cai aqui
+	desc_Playlist * ListaBuscaPorArtista = NULL; //quando buscar por antista vem para esta
 	musica * novaMusica = NULL;
 	nodo * nodoOriginal = criaNodo();
 	nodo * nodoPlaylistAleatoria = NULL;
@@ -48,13 +50,14 @@ int main(){
 		//imprimeLista(acervo);
 	
 	//Menu principal e variaveis dos menus filhos
-	int menuPrincipal=0,menuImpressao = 0, menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
-	int quantMusicasAleatorias = 0, contadorItensFila = 0;
+	int menuPrincipal=0, menuBusca = 0,menuImpressao = 0, menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
+	int quantMusicasAleatorias = 0, contadorItensFila = 0, posicaoBuscada;
+	char tituloBuscado[256];
 	do
 	{
 		printf("\nMenu Principal:\n");
-		printf("[1] - Execucao.\n");
-		printf("[2] - Playlist.\n");
+		printf("[1] - Criar Playlist.\n");
+		printf("[2] - Execucao.\n");
 		printf("[3] - Busca.\n");
 		printf("[4] - Impressão.\n");
 		printf("[5] - Relatorios,\n");
@@ -64,7 +67,7 @@ int main(){
 
 		switch (menuPrincipal)
 		{
-		case 1:
+		case 2:
 			do
 			{
 				printf("Escolha qual playlist deseja executar.\n");
@@ -96,7 +99,7 @@ int main(){
 			} while (menuExec != 4);
 			
 			break;
-		case 2:
+		case 1:
 			/* Playlist */
 			do
 			{
@@ -122,7 +125,7 @@ int main(){
 						{
 							/* buscar na LDE pela posição e
 							inserir na fila */
-							nodoOriginal = buscaNodo(acervo, rand()%tamanhoAcervo);
+							nodoOriginal = buscaNodoPorPosicao(acervo, rand()%tamanhoAcervo);
 							nodoPlaylistAleatoria = copiaNodo(nodoOriginal);
 							queue = enqueue(queue, nodoPlaylistAleatoria);
 							contadorItensFila++;
@@ -160,7 +163,57 @@ int main(){
 			break;
 		case 3:
 			/* Busca */
-
+			do
+			{
+				printf("Escolha o tipo de busca.\n");
+				printf("[1] - Buscar musicas por Posicao.\n");
+				printf("[2] - Buscar musicas por Titulo.\n");
+				printf("[3] - Buscar musicas por Codigo.\n");
+				printf("[4] - Buscar musicas por Artista.\n");
+				printf("[5] - Sair / Voltar ao menu anterior.\n");
+				setbuf(stdin, NULL);
+				scanf("%d", &menuBusca);
+			
+				switch (menuBusca)
+				{
+				case 1:
+					// BUSCAR POR POSICAO
+					printf("Digite a posicao da musica que deseja Buscar.\n");
+					setbuf(stdin,NULL);
+					scanf("%d", &posicaoBuscada);
+					imprimeNodo(buscaNodoPorPosicao(acervo,posicaoBuscada));
+					break;
+				case 2:
+					// BUSCAR POR TITULO
+					printf("Digite o Titulo da musica que seja buscar.\n");
+					setbuf(stdin, NULL);
+					fgets(tituloBuscado, sizeof(tituloBuscado), stdin);
+					ListaBuscaPorTitulo = buscaNodoPorTitulo(acervo,tituloBuscado);
+					printf("\n MUSICA(s) ENCONTRADA(s). \n");
+					imprimeLista(ListaBuscaPorTitulo);
+					break;
+				case 3:
+					// BUSCAR POR CODIGO
+					
+					break;
+				case 4:
+					// BUSCAR POR ARTISTA
+					
+					break;
+				default:
+					break;
+				}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}while (menuBusca != 5);
 			/*Fim do modulo de Busca*/
 			break;
 		case 4:
@@ -231,8 +284,6 @@ void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica)
 	novaMusica = criaMusica(artista,codigo,titulo,letra);
 	//printf("===================================\n");
 	
-	//novoNodo = criaNodo();
-	//novoNodo->info = novaMusica;
 	insereLDE(acervo, novaMusica, 0);
 
 	return;

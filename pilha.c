@@ -114,7 +114,7 @@ desc_Stack * criarPlayListPessoal(desc_Playlist * facervo, int opcaoMenu){
             printf("Digite a posição da musica que deseja incluir na playlist.\n");
             setbuf(stdin, NULL);
             scanf("%d", &posicaoMusica);
-            fnodo = buscaNodo(facervo, posicaoMusica);
+            fnodo = buscaNodoPorPosicao(facervo, posicaoMusica);
             if(fnodo == NULL){
                 printf("Posicao inexistente no acervo.\n");
             }else{
@@ -130,8 +130,8 @@ desc_Stack * criarPlayListPessoal(desc_Playlist * facervo, int opcaoMenu){
         break;
     
     case 2:
-        /*Playlist pessoal por nome*/
-       
+        /*Playlist pessoal por Titulo*/
+        
         break;
     case 3:
         /*Playlist pessoal por codigo*/
