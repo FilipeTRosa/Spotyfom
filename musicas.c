@@ -41,7 +41,6 @@ nodo * criaNodo(void){
 void insereLDE (desc_Playlist * lista,musica * fmusica, int posicao){
 
     int i = 0;
-    nodo *aux = lista->primeiramusica;
     nodo * fnodo = criaNodo();
     fnodo->info = fmusica;
 
@@ -56,6 +55,7 @@ void insereLDE (desc_Playlist * lista,musica * fmusica, int posicao){
             lista->ultimamusica = fnodo;
             lista->tamanho++;
         }else{
+            
             if (posicao == 0)// insere no começo quando a lista tem itens
             {
                 fnodo->prox = lista->primeiramusica;
@@ -64,6 +64,7 @@ void insereLDE (desc_Playlist * lista,musica * fmusica, int posicao){
                 lista->tamanho++;
                 return;
             }else{
+                nodo *aux = lista->primeiramusica;
                 if (posicao > 0 && posicao < lista->tamanho)// insere no meio
                 {
                     while (i < posicao)
@@ -80,6 +81,7 @@ void insereLDE (desc_Playlist * lista,musica * fmusica, int posicao){
                 }
             }       
             if(posicao = lista->tamanho){ //inserir no fim
+                nodo *aux = lista->primeiramusica;
                 while (aux->prox != NULL)
                 {
                     aux = aux->prox;
@@ -104,7 +106,7 @@ void imprimeLista(desc_Playlist * lista){
         printf("\n[Elemento] = %d\n", i);
         imprimeNodo(aux);
         aux = aux->prox;
-        if (i%10 == 0)
+        if (i%50 == 0)
         {   
             printf("\n\nMusicas impressas até o momento: [ %d ]\n Precione ENTER para continuar.", i);
             getchar();
@@ -195,22 +197,28 @@ nodo * buscaNodoPorCodigo(desc_Playlist * lista, int codigo){
 desc_Playlist * buscaNodoPorTitulo (desc_Playlist * flista, char * ftitulo){
     nodo * aux = flista->primeiramusica;
     nodo * nodoLimpo = NULL;
-    desc_Playlist * listaMusicasEncontradas = (desc_Playlist *) malloc (sizeof(desc_Playlist));
+    desc_Playlist * listaMusicasEncontradas = criaLista();
     int testeTituloIgual = 1;
     while (aux != NULL)
     {
+        //printf("Estamos no while\n");
         testeTituloIgual = strcmp(aux->info->titulo,ftitulo);
-        if(testeTituloIgual==0){
-            nodoLimpo = copiaNodo(aux);
-            insereLDE(listaMusicasEncontradas, nodoLimpo->info, 0);
+        printf("Titulo %s\n", aux->info->titulo);
+        printf("Pesquisado %s\n", ftitulo);
+        printf(" resultado %d \n", testeTituloIgual);
+        getchar();
+        if( testeTituloIgual== 0){
+            //nodoLimpo = copiaNodo(aux);
+            printf("ACHOU A MUSICA\n");
+            insereLDE(listaMusicasEncontradas, aux->info, 0);
             return listaMusicasEncontradas;
         }else
         {
-            char * testeTituloParcial =  strstr(aux->info->titulo, ftitulo); 
-            if (testeTituloParcial != NULL)
+            //char * testeTituloParcial =  strstr(aux->info->titulo, ftitulo); 
+            if (strstr(aux->info->titulo, ftitulo) != NULL)
             {
-                nodoLimpo = copiaNodo(aux);
-                insereLDE(listaMusicasEncontradas, nodoLimpo->info, 0);
+                //nodoLimpo = copiaNodo(aux);
+                insereLDE(listaMusicasEncontradas, aux->info, 0);
             }
             
         }

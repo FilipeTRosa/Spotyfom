@@ -24,8 +24,8 @@ int main(){
 	int  n=0;
 	//preparando variaveis para o sistema
 	desc_Playlist * acervo = criaLista();
-	desc_Playlist * ListaBuscaPorTitulo = NULL; // quando buscar por titulo cai aqui
-	desc_Playlist * ListaBuscaPorArtista = NULL; //quando buscar por antista vem para esta
+	desc_Playlist * listaBuscaPorTitulo = criaLista(); // quando buscar por titulo cai aqui
+	desc_Playlist * listaBuscaPorArtista = criaLista(); //quando buscar por antista vem para esta
 	musica * novaMusica = NULL;
 	nodo * nodoOriginal = criaNodo();
 	nodo * nodoPlaylistAleatoria = NULL;
@@ -188,9 +188,16 @@ int main(){
 					printf("Digite o Titulo da musica que seja buscar.\n");
 					setbuf(stdin, NULL);
 					fgets(tituloBuscado, sizeof(tituloBuscado), stdin);
-					ListaBuscaPorTitulo = buscaNodoPorTitulo(acervo,tituloBuscado);
+					//strcpy(tituloBuscado, toupper(tituloBuscado));
+					listaBuscaPorTitulo = buscaNodoPorTitulo(acervo,tituloBuscado);
 					printf("\n MUSICA(s) ENCONTRADA(s). \n");
-					imprimeLista(ListaBuscaPorTitulo);
+					if((listaBuscaPorTitulo->tamanho) == 0){
+						printf("lista vazia\n");
+					}else
+					{
+						printf("Tamanho - %d \n", listaBuscaPorTitulo->tamanho);
+						imprimeLista(listaBuscaPorTitulo);
+					}
 					break;
 				case 3:
 					// BUSCAR POR CODIGO
