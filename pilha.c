@@ -72,7 +72,6 @@ nodo * popStackReturnNodo (desc_Stack * fstack){
         fstack->length--;
         return aux;
     }
-    
 }
 
 

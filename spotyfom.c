@@ -187,7 +187,8 @@ int main(){
 					// BUSCAR POR TITULO
 					printf("Digite o Titulo da musica que seja buscar.\n");
 					setbuf(stdin, NULL);
-					fgets(tituloBuscado, sizeof(tituloBuscado), stdin);
+					scanf("%[^\n]s", tituloBuscado);
+					//fgets(tituloBuscado, sizeof(tituloBuscado), stdin);
 					//strcpy(tituloBuscado, toupper(tituloBuscado));
 					listaBuscaPorTitulo = buscaNodoPorTitulo(acervo,tituloBuscado);
 					printf("\n MUSICA(s) ENCONTRADA(s). \n");
@@ -210,16 +211,7 @@ int main(){
 				default:
 					break;
 				}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			}while (menuBusca != 5);
 			/*Fim do modulo de Busca*/
 			break;
@@ -264,13 +256,6 @@ int main(){
 	return 0;
 
 }
-
-
-
-
-
-
-
 
 
 void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica){

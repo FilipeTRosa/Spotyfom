@@ -106,7 +106,7 @@ void imprimeLista(desc_Playlist * lista){
         printf("\n[Elemento] = %d\n", i);
         imprimeNodo(aux);
         aux = aux->prox;
-        if (i%50 == 0)
+        if (i%20 == 0)
         {   
             printf("\n\nMusicas impressas até o momento: [ %d ]\n Precione ENTER para continuar.", i);
             getchar();
@@ -194,37 +194,37 @@ nodo * buscaNodoPorCodigo(desc_Playlist * lista, int codigo){
     return NULL; 
 }
 
+desc_Playlist * resetaListaLDE (desc_Playlist * flista){
+
+    flista->ant = NULL;
+    flista->prox = NULL;
+    flista->primeiramusica = NULL;
+    flista->ultimamusica = NULL;
+    flista->tamanho = 0;
+
+    return flista;
+}
+
 desc_Playlist * buscaNodoPorTitulo (desc_Playlist * flista, char * ftitulo){
     nodo * aux = flista->primeiramusica;
     nodo * nodoLimpo = NULL;
     desc_Playlist * listaMusicasEncontradas = criaLista();
-    int testeTituloIgual = 1;
     while (aux != NULL)
     {
-        //printf("Estamos no while\n");
-        testeTituloIgual = strcmp(aux->info->titulo,ftitulo);
-        printf("Titulo %s\n", aux->info->titulo);
-        printf("Pesquisado %s\n", ftitulo);
-        printf(" resultado %d \n", testeTituloIgual);
-        getchar();
-        if( testeTituloIgual== 0){
-            //nodoLimpo = copiaNodo(aux);
+        if(strcmp(aux->info->titulo,ftitulo) == 0){
             printf("ACHOU A MUSICA\n");
+            listaMusicasEncontradas = resetaListaLDE(listaMusicasEncontradas);
             insereLDE(listaMusicasEncontradas, aux->info, 0);
             return listaMusicasEncontradas;
         }else
         {
-            //char * testeTituloParcial =  strstr(aux->info->titulo, ftitulo); 
             if (strstr(aux->info->titulo, ftitulo) != NULL)
             {
-                //nodoLimpo = copiaNodo(aux);
                 insereLDE(listaMusicasEncontradas, aux->info, 0);
             }
-            
         }
         aux = aux->prox;
     }
-    
     return listaMusicasEncontradas;
 }
 
@@ -285,7 +285,6 @@ nodo * copiaNodo(nodo * nodoOriginal){
 }
 
 void executarMusica(nodo * fnodo){
-
     fnodo->info->execucoes++;
     printf("Executando musica: %s /-/ Codigo: [%d]\n", fnodo->info->titulo, fnodo->info->codigo);
 }
