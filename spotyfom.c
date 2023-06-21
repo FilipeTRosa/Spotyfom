@@ -51,7 +51,7 @@ int main(){
 	
 	//Menu principal e variaveis dos menus filhos
 	int menuPrincipal=0, menuBusca = 0,menuImpressao = 0, menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
-	int quantMusicasAleatorias = 0, contadorItensFila = 0, posicaoBuscada;
+	int quantMusicasAleatorias = 0, contadorItensFila = 0, posicaoBuscada, codigoBuscado;
 	char tituloBuscado[256];
 	do
 	{
@@ -202,7 +202,19 @@ int main(){
 					break;
 				case 3:
 					// BUSCAR POR CODIGO
-					
+					printf("Digite o codigo da musica que deseja buscar.\n");
+					setbuf(stdin, NULL);
+					scanf("%d", &codigoBuscado);
+					nodo = criaNodo();
+					nodo = buscaNodoPorCodigo(acervo, codigoBuscado);
+					if (nodo == NULL)
+					{
+						printf("Musica não encontrada. \n");
+					}else
+					{
+						printf("Musica encontrada. \n");
+						imprimeNodo(nodo);
+					}
 					break;
 				case 4:
 					// BUSCAR POR ARTISTA

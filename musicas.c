@@ -38,6 +38,7 @@ nodo * criaNodo(void){
     return novoNodo;
 }
 
+
 void insereLDE (desc_Playlist * lista,musica * fmusica, int posicao){
 
     int i = 0;
@@ -212,21 +213,50 @@ desc_Playlist * buscaNodoPorTitulo (desc_Playlist * flista, char * ftitulo){
     while (aux != NULL)
     {
         if(strcmp(aux->info->titulo,ftitulo) == 0){
-            printf("ACHOU A MUSICA\n");
-            listaMusicasEncontradas = resetaListaLDE(listaMusicasEncontradas);
+            //printf("ACHOU A MUSICA\n");
+            //listaMusicasEncontradas = resetaListaLDE(listaMusicasEncontradas);
+            //caso ache a musica exata vai inserir no inicio
             insereLDE(listaMusicasEncontradas, aux->info, 0);
-            return listaMusicasEncontradas;
+            //return listaMusicasEncontradas;
         }else
         {
             if (strstr(aux->info->titulo, ftitulo) != NULL)
             {
-                insereLDE(listaMusicasEncontradas, aux->info, 0);
+                //caso ache a substring insere no fim
+                insereLDE(listaMusicasEncontradas, aux->info, listaMusicasEncontradas->tamanho);
             }
         }
         aux = aux->prox;
     }
     return listaMusicasEncontradas;
 }
+
+desc_Playlist * buscaNodoPorArtista (desc_Playlist * flista, char * fartista){
+    nodo * aux = flista->primeiramusica;
+    nodo * nodoLimpo = NULL;
+    desc_Playlist * listaMusicasEncontradasArtista = criaLista();
+    while (aux != NULL)
+    {
+        if(strcmp(aux->info->titulo,fartista) == 0){
+            //printf("ACHOU A MUSICA\n");
+            //listaMusicasEncontradas = resetaListaLDE(listaMusicasEncontradas);
+            //caso ache a musica exata vai inserir no inicio
+            insereLDE(listaMusicasEncontradasArtista, aux->info, 0);
+            //return listaMusicasEncontradas;
+        }else
+        {
+            if (strstr(aux->info->titulo, fartista) != NULL)
+            {
+                //caso ache a substring insere no fim
+                insereLDE(listaMusicasEncontradasArtista, aux->info, listaMusicasEncontradasArtista->tamanho);
+            }
+        }
+        aux = aux->prox;
+    }
+    return listaMusicasEncontradasArtista;
+}
+
+
 
 void setMusica (desc_Playlist * lista){
     /*musica * fmusica = criaMusica();

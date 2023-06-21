@@ -53,3 +53,4 @@ void executarPlaylistLDE(desc_Playlist * flistaLDE, int tamanho);
 nodo * buscaNodoPorCodigo(desc_Playlist * lista, int codigo);
 desc_Playlist * buscaNodoPorTitulo (desc_Playlist * flista, char * ftitulo);
 desc_Playlist * resetaListaLDE (desc_Playlist * flista);
+desc_Playlist * buscaNodoPorArtista (desc_Playlist * flista, char * fartista);
