@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "musicas.h"
 #include "pilha.h"
 #include "fila.h"
+#include <time.h>
 
 void quebraFrase(char *frase,int n,desc_Playlist * acervo, musica * novaMusica);
 
 int main(){
-	
+	srand(time(NULL));
 	FILE *arquivoEntrada;
 	arquivoEntrada = fopen("musicas.txt","r");
 	if(arquivoEntrada ==NULL){
@@ -52,14 +54,14 @@ int main(){
 	//Menu principal e variaveis dos menus filhos
 	int menuPrincipal=0, menuBusca = 0,menuImpressao = 0, menuPlaylist=0, menuExec = 0, menuPessoal = 0, menuPlaylistPessoal =0;
 	int quantMusicasAleatorias = 0, contadorItensFila = 0, posicaoBuscada, codigoBuscado;
-	char tituloBuscado[256];
+	char tituloBuscado[256], artistaBuscado[256];
 	do
 	{
 		printf("\nMenu Principal:\n");
 		printf("[1] - Criar Playlist.\n");
 		printf("[2] - Execucao.\n");
 		printf("[3] - Busca.\n");
-		printf("[4] - Impressão.\n");
+		printf("[4] - Impressao.\n");
 		printf("[5] - Relatorios,\n");
 		printf("[6] - Sair.\n");
 		setbuf(stdin,NULL);
@@ -67,6 +69,68 @@ int main(){
 
 		switch (menuPrincipal)
 		{
+		case 1:
+		/* Playlist */
+			do
+			{
+				printf("\nEscolha o tipo de playlist para criar. \n");
+				printf("[1] - Aleatoria.\n");
+				printf("[2] - Selecionar as musicas.\n");
+				printf("[3] - Voltar ao menu principal.\n");
+				setbuf(stdin,NULL);
+				scanf("%d", &menuPlaylist);
+
+				switch (menuPlaylist)
+				{
+				case 1:
+					/* Aleatoria */
+					printf("Quantidade de musicas disponiveis %d:\n", tamanhoAcervo);
+					printf("\nDigite a quantidade de musicas para a sua Playlist.\n");
+					setbuf(stdin, NULL);
+					scanf("%d", &quantMusicasAleatorias);
+					//fazer um if para testar se 
+					//valor informado é < que tamanhoAcervo
+					
+						while (contadorItensFila < quantMusicasAleatorias)
+						{
+							/* buscar na LDE pela posição e
+							inserir na fila */
+							nodoOriginal = buscaNodoPorPosicao(acervo, rand()%tamanhoAcervo);
+							nodoPlaylistAleatoria = copiaNodo(nodoOriginal);
+							queue = enqueue(queue, nodoPlaylistAleatoria);
+							contadorItensFila++;
+						}
+						printf("\n\n Playlist Criada \n\n");
+						showQueue(queue);
+
+					break;
+				case 2:
+					/* Escolher musicas*/
+					/* Montar menu com os tipos de escolhas*/
+					do
+					{
+						printf("Criar playlist escolhendo as musicas.\n");
+						printf("[1] - Escolher musicas por Posicao.\n");
+						printf("[2] - Escolher musicas por Codigo.\n");
+						printf("[3] - Sair / Voltar ao menu anterior.\n");
+						setbuf(stdin, NULL);
+						scanf("%d", &menuPlaylistPessoal);
+						
+						if (menuPlaylistPessoal < 3)
+						{	//chama funcao de criar playlist por escolha
+							//switch está dentro da funcao criarPlayListPessoal
+							stack = criarPlayListPessoal(acervo, menuPlaylistPessoal);
+						}
+					}while (menuPlaylistPessoal != 3);
+					printf("\n\n Playlist Criada \n\n");
+					printStack(stack);									
+					break;
+				default:
+					break;
+				}
+			} while (menuPlaylist != 3);
+			/*fim do modulo de criar playlists*/
+			break;
 		case 2:
 			do
 			{
@@ -99,68 +163,7 @@ int main(){
 			} while (menuExec != 4);
 			
 			break;
-		case 1:
-			/* Playlist */
-			do
-			{
-				printf("\nEscolha o tipo de playlis para criar. \n");
-				printf("[1] - Aleatoria.\n");
-				printf("[2] - Selecionar as musicas.\n");
-				printf("[3] - Voltar ao menu principal.\n");
-				setbuf(stdin,NULL);
-				scanf("%d", &menuPlaylist);
 
-				switch (menuPlaylist)
-				{
-				case 1:
-					/* Aleatoria */
-					printf("Quantidade de musicas disponiveis %d:\n", tamanhoAcervo);
-					printf("\nDigite a quantidade de musicas para a sua Playlist.\n");
-					setbuf(stdin, NULL);
-					scanf("%d", &quantMusicasAleatorias);
-					//fazer um if para testar se 
-					//valor informado é < que tamanhoAcervo
-					
-						while (contadorItensFila < quantMusicasAleatorias)
-						{
-							/* buscar na LDE pela posição e
-							inserir na fila */
-							nodoOriginal = buscaNodoPorPosicao(acervo, rand()%tamanhoAcervo);
-							nodoPlaylistAleatoria = copiaNodo(nodoOriginal);
-							queue = enqueue(queue, nodoPlaylistAleatoria);
-							contadorItensFila++;
-						}
-						printf("\n\n\n\n FILAAAAAA \n\n\n\n");
-						showQueue(queue);
-
-					break;
-				case 2:
-					/* Escolher musicas*/
-					/* Montar menu com os tipos de escolhas*/
-					do
-					{
-						printf("Criar playlist escolhendo as musicas.\n");
-						printf("[1] - Escolher musicas por Posicao.\n");
-						printf("[2] - Escolher musicas por Nome.\n");
-						printf("[3] - Escolher musicas por Codigo.\n");
-						printf("[4] - Escolher musicas por Artista.\n");
-						printf("[5] - Sair / Voltar ao menu anterior.\n");
-						setbuf(stdin, NULL);
-						scanf("%d", &menuPlaylistPessoal);
-						
-						if (menuPlaylistPessoal < 5)
-						{	//chama funcao de criar playlist por escolha
-							//switch está dentro da funcao criarPlayListPessoal
-							stack = criarPlayListPessoal(acervo, menuPlaylistPessoal);
-						}
-					}while (menuPlaylistPessoal != 5);									
-					break;
-				default:
-					break;
-				}
-			} while (menuPlaylist != 3);
-			/*fim do modulo de criar playlists*/
-			break;
 		case 3:
 			/* Busca */
 			do
@@ -218,7 +221,21 @@ int main(){
 					break;
 				case 4:
 					// BUSCAR POR ARTISTA
-					
+					printf("Digite o Artista da musica que seja buscar.\n");
+					setbuf(stdin, NULL);
+					scanf("%[^\n]s", artistaBuscado);
+					//fgets(tituloBuscado, sizeof(tituloBuscado), stdin);
+					//strcpy(tituloBuscado, toupper(tituloBuscado));
+					listaBuscaPorArtista = buscaNodoPorArtista(acervo,artistaBuscado);
+					printf("\n MUSICA(s) ENCONTRADA(s). \n");
+					if((listaBuscaPorArtista->tamanho) == 0){
+						printf("lista vazia\n");
+					}else
+					{
+						printf("Tamanho - %d \n", listaBuscaPorArtista->tamanho);
+						imprimeLista(listaBuscaPorArtista);
+					}
+					//FIM BUSCA POR ARTISTA
 					break;
 				default:
 					break;
@@ -285,6 +302,9 @@ void quebraFrase(char *frase,int n, desc_Playlist * acervo, musica * novaMusica)
 	strcpy(titulo,strtok(NULL,";"));
 	//printf("letra é: %s \n",strtok(NULL,";")); 
 	strcpy(letra,strtok(NULL,";"));
+	converterStringParaMaiuscula(artista);
+	converterStringParaMaiuscula(titulo);
+
 	novaMusica = criaMusica(artista,codigo,titulo,letra);
 	//printf("===================================\n");
 	

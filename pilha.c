@@ -3,7 +3,7 @@
 #include <string.h>
 #include "musicas.h"
 #include "pilha.h"
-
+//#include <time.h>
 /* funcoes da pilha/stack */
 
 
@@ -91,11 +91,11 @@ void printStack(desc_Stack * fstack){
     nodo * aux = fstack->first_stack;
     while (aux != NULL)
     {   
-        printf("\n*----------*\n");
+        //printf("\n*----------*\n");
         imprimeNodo(aux);
         aux = aux->prox;
     }
-        printf("\n*----------*\n");
+        //printf("\n*----------*\n");
     
 }
 
@@ -127,12 +127,7 @@ desc_Stack * criarPlayListPessoal(desc_Playlist * facervo, int opcaoMenu){
             
         } while (menuInsercao != 2);
         break;
-    
     case 2:
-        /*Playlist pessoal por Titulo*/
-        
-        break;
-    case 3:
         /*Playlist pessoal por codigo*/
          do
         {
@@ -153,10 +148,7 @@ desc_Stack * criarPlayListPessoal(desc_Playlist * facervo, int opcaoMenu){
             scanf("%d", &menuInsercao);
             
         } while (menuInsercao != 2);
-        break;
-    case 4:
-        /*Play list pessoal por Artista*/
-        break;    
+        break;  
     default:
         break;
     }

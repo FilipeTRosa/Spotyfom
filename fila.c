@@ -117,11 +117,11 @@ void showQueue (desc_queue * fqueue){
 
     while (aux != NULL)
     {   
-        printf("\n*-----------------*\n");
+        //printf("\n*-----------------*\n");
         imprimeNodo(aux);
         aux = aux->prox;
     }
-        printf("\n*-----------------*\n");
+        //printf("\n*-----------------*\n");
 
 }
 

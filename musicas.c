@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "musicas.h"
+//#include <time.h>
 
 desc_Playlist * criaLista (void){
     desc_Playlist * lista = (desc_Playlist*) malloc (sizeof(desc_Playlist));
@@ -104,12 +106,12 @@ void imprimeLista(desc_Playlist * lista){
     while (i<lista->tamanho)
     {
         //printf("\n-*/-*/-*/-*/-*/\n");
-        printf("\n[Elemento] = %d\n", i);
+        //printf("\n[Elemento] = %d\n", i);
         imprimeNodo(aux);
         aux = aux->prox;
         if (i%20 == 0)
         {   
-            printf("\n\nMusicas impressas até o momento: [ %d ]\n Precione ENTER para continuar.", i);
+            //printf("\n\nMusicas impressas até o momento: [ %d ] / Total: %d\n Precione ENTER para continuar.", i, lista->tamanho);
             getchar();
         }
         i++;
@@ -117,9 +119,9 @@ void imprimeLista(desc_Playlist * lista){
 }
 
 void imprimeNodo(nodo * aux){
-    
-    printf("[Titulo] = %s [Artista] = %s [Letra] = %s [Codigo] = %d [Execucoes] = %d ", aux->info->titulo, aux->info->artista, aux->info->letra, aux->info->codigo, aux->info->execucoes);
-
+    printf("-----------------------------\n");
+    printf("Titulo: [%s] \nArtista: [%s] \nLetra: [%s] \nCodigo: [%d] \nExecucoes: [%d] \n", aux->info->titulo, aux->info->artista, aux->info->letra, aux->info->codigo, aux->info->execucoes);
+    printf("-----------------------------\n");
 }
 
 void limpar_buffer() {
@@ -210,14 +212,12 @@ desc_Playlist * buscaNodoPorTitulo (desc_Playlist * flista, char * ftitulo){
     nodo * aux = flista->primeiramusica;
     nodo * nodoLimpo = NULL;
     desc_Playlist * listaMusicasEncontradas = criaLista();
+    converterStringParaMaiuscula(ftitulo);
     while (aux != NULL)
     {
         if(strcmp(aux->info->titulo,ftitulo) == 0){
-            //printf("ACHOU A MUSICA\n");
-            //listaMusicasEncontradas = resetaListaLDE(listaMusicasEncontradas);
             //caso ache a musica exata vai inserir no inicio
             insereLDE(listaMusicasEncontradas, aux->info, 0);
-            //return listaMusicasEncontradas;
         }else
         {
             if (strstr(aux->info->titulo, ftitulo) != NULL)
@@ -235,17 +235,15 @@ desc_Playlist * buscaNodoPorArtista (desc_Playlist * flista, char * fartista){
     nodo * aux = flista->primeiramusica;
     nodo * nodoLimpo = NULL;
     desc_Playlist * listaMusicasEncontradasArtista = criaLista();
+    converterStringParaMaiuscula(fartista);
     while (aux != NULL)
     {
-        if(strcmp(aux->info->titulo,fartista) == 0){
-            //printf("ACHOU A MUSICA\n");
-            //listaMusicasEncontradas = resetaListaLDE(listaMusicasEncontradas);
+        if(strcmp(aux->info->artista,fartista) == 0){
             //caso ache a musica exata vai inserir no inicio
             insereLDE(listaMusicasEncontradasArtista, aux->info, 0);
-            //return listaMusicasEncontradas;
         }else
         {
-            if (strstr(aux->info->titulo, fartista) != NULL)
+            if (strstr(aux->info->artista, fartista) != NULL)
             {
                 //caso ache a substring insere no fim
                 insereLDE(listaMusicasEncontradasArtista, aux->info, listaMusicasEncontradasArtista->tamanho);
@@ -332,4 +330,12 @@ void executarPlaylistLDE(desc_Playlist * flistaLDE, int tamanho){
             }
             cont++;
         }				
+}
+
+void converterStringParaMaiuscula(char *str) {
+    int i = 0;
+    while (str[i] != '\0') {
+        str[i] = toupper(str[i]);
+        i++;
+    }
 }
